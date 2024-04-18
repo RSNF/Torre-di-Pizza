@@ -1,6 +1,6 @@
 <?php
 
-include_once "bootstrap.php";
+include_once "src/bootstrap.php";
 
 include "usuario_seeder.php";
 include "tamanhos_seeder.php";

@@ -78,7 +78,7 @@ class PedidoBebidasServices implements ServicesInterface {
     
     static public function delete(Request $request, Response $response, array $params) {
 
-        $result = PedidoBebidasRepository::delete($params["id"]);
+        $result = PedidoBebidasRepository::delete($params["pedido"], $params["bebida"]);
 
         return $response;
     }

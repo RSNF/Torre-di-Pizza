@@ -6,19 +6,9 @@ volumes:
 
 services:
 
-  php:
-    build: ./PHP-Apache
-    container_name: php-apache-api
-    volumes:
-      - ./PHP-Apache/sites-available:/etc/apache2/sites-available
-      - ./../project:/var/www/html/project
-    ports:
-      - 80:80
-      - 9000:9000
-
   postgres:
     build: ./Postgresql
-    container_name: postgresql-api
+    container_name: postgresql-pizzaria
     environment:
       - POSTGRES_USER=${MY_POSTGRES_USER}
       - POSTGRES_PASSWORD=${MY_POSTGRES_PASSWORD}
@@ -29,7 +19,7 @@ services:
 
   pgadmin:
     build: ./PGAdmin
-    container_name: pgadmin-api
+    container_name: pgadmin-pizzaria
     depends_on:
       - postgres
     ports:
@@ -37,3 +27,14 @@ services:
     environment:
       - PGADMIN_DEFAULT_EMAIL=${MY_PGADMIN_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${MY_PGADMIN_PASSWORD}
+
+  php:
+    build: ./Alpine
+    container_name: alpine-pizzaria
+    depends_on:
+      - postgres
+    ports:
+      - 8080:80
+    volumes:
+      - ./../project:/var/www/html/
+    working_dir: "/var/www/html"

@@ -2,85 +2,57 @@
 
 namespace App\Services;
 
+use App\Validators\BebidaValidation;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use App\Repositories\BebidasRepository;
 
-include_once "src/utils/array_to_xml.php";
-include_once "src/utils/xml_to_array.php";
-include_once "src/utils/xml_or_json.php";
-include_once "src/utils/get_content_type.php";
+use App\Repositories\BebidasRepository\BebidasRepository;
+use App\Services\BaseServiceInterface;
 
-class BebidasServices implements ServicesInterface {
+class BebidasServices implements BaseServiceInterface
+{
+    /**
+     * @var \App\Repositories\BebidasRepository\BebidasRepository;
+     */
+    private $repository;
 
-    static public function show(Request $request, Response $response, array $params) {
+    /**
+     * @var \App\Validators\BebidaValidation;
+     */
+    private $validator;
 
-        $result = BebidasRepository::show($params["id"]);
-        $params_type = $request->getQueryParams();
-    
-        $content_type = $request->getHeader("Content-Type");
-        @$type = get_content_type($content_type[0], $params_type["type"]);
-        $contents = xml_or_json_encode($type, $result);
-    
-        $response = $response->withHeader("Content-Type", $type);
-        $response->getBody()->write($contents);
-    
-        return $response;
+    public function __construct()
+    {
+        $this->repository = new BebidasRepository();
+        $this->validator = new BebidaValidation();
     }
-    
-    static public function list(Request $request, Response $response, array $params) {
 
-        $result = BebidasRepository::list();
-        $params_type = $request->getQueryParams();
-    
-        $content_type = $request->getHeader("Content-Type");
-        @$type = get_content_type($content_type[0], $params_type["type"]);
-        $contents = xml_or_json_encode($type, $result);
-    
-        $response = $response->withHeader("Content-Type", $type);
-        
-        $response->getBody()->write($contents);
-    
-        return $response;
+    function create(Response $response, Request $request)
+    {
+
     }
-    
-    static public function store(Request $request, Response $response, array $params) {
 
-        $params_type = $request->getQueryParams();
-        $content_type = $request->getHeader("Content-Type");
+    function update(Response $response, Request $request)
+    {
 
-        $contents = $request->getBody()->getContents();
-
-        @$type = get_content_type($content_type[0], $params_type["type"]);
-        
-        $array = xml_or_json_decode($type, $contents);
-    
-        $result = BebidasRepository::store($array);
-    
-        return $response;
     }
-    
-    static public function update(Request $request, Response $response, array $params) {
 
-        $params_type = $request->getQueryParams();
-        $content_type = $request->getHeader("Content-Type");
+    function delete(Response $response, Request $request)
+    {
 
-        $contents = $request->getBody()->getContents();
-
-        @$type = get_content_type($content_type[0], $params_type["type"]);
-
-        $array = xml_or_json_decode($type, $contents);
-    
-        $result = BebidasRepository::update($params["id"], $array);
-    
-        return $response;
     }
-    
-    static public function delete(Request $request, Response $response, array $params) {
 
-        $result = BebidasRepository::delete($params["id"]);
+    function find(Response $response, Request $request)
+    {
 
-        return $response;
+    }
+
+    function all(array $params)
+    {
+        $params["field"] = $this->validator->checkWhiteList($params["field"], ["id", "nome", "preco"]);
+        $this->validator->checkWhiteList($params["sort"], ["asc", "desc", "ASC", "DESC"]);
+
+        return $this->repository->all($params);
     }
 }
 

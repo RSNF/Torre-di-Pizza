@@ -4,43 +4,48 @@ namespace App\Controllers;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+
 use App\Services\BebidasServices;
+use App\Repositories\BebidasRepository\BebidasRepository;
 
-class BebidasController {
+class BebidasController extends BaseController implements BaseControllerInterface
+{
+    private BebidasServices $bebidasServices;
 
-    public function show(Request $request, Response $response, array $params) {
-
-        $res = BebidasServices::show($request, $response, $params);
-
-        return $res;
+    public function __construct()
+    {
+        $this->bebidasServices = new BebidasServices();
     }
 
-    public function list(Request $request, Response $response, array $params) {
+    function create(Request $request, Response $response)
+    {
 
-        $res = BebidasServices::list($request, $response, $params);
-
-        return $res;
     }
 
-    public function store(Request $request, Response $response, array $params) {
+    function update(Request $request, Response $response)
+    {
 
-        $res = BebidasServices::store($request, $response, $params);
-
-        return $res;
     }
 
-    public function update(Request $request, Response $response, array $params) {
+    function delete(Request $request, Response $response)
+    {
 
-        $res = BebidasServices::update($request, $response, $params);
-
-        return $res;
     }
 
-    public function delete(Request $request, Response $response, array $params) {
+    function find(Request $request, Response $response)
+    {
 
-        $res = BebidasServices::delete($request, $response, $params);
+    }
 
-        return $res;
+    function all(Request $request, Response $response)
+    {
+        $params = $this->getParams($request);
+
+        $content = $this->bebidasServices->all($params);
+
+        $response->getBody()->write(json_encode($content));
+
+        return $response;
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\BebidaRepository;
+namespace App\Repositories\BebidasRepository;
 
 interface BebidaInterface
 {
@@ -29,9 +29,10 @@ interface BebidaInterface
     public function find(string $id);
 
     /**
+     * @param array $params
      * @return array
      */
-    public function all();
+    public function all(array $params);
 }
 
 ?>

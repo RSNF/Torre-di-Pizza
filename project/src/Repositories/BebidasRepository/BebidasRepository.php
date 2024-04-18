@@ -1,17 +1,12 @@
 <?php
 
-namespace App\Repositories\BebidaRepository;
+namespace App\Repositories\BebidasRepository;
 
-use App\Repositories\BebidaRepository\BebidaInterface;
+use App\Repositories\BebidasRepository\BebidaInterface;
 use App\Repositories\RepoQueries;
 
 class BebidasRepository extends RepoQueries implements BebidaInterface
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function create(array $data)
     {
         $sql = "INSERT INTO pizzaria.bebidas
@@ -45,9 +40,9 @@ class BebidasRepository extends RepoQueries implements BebidaInterface
         return $this->getRowParams($sql, array($id));
     }
 
-    public function all()
+    public function all(array $params)
     {
-        $sql = "SELECT * FROM pizzaria.bebidas";
+        $sql = "SELECT * FROM pizzaria.bebidas ORDER BY $params[field] $params[sort] LIMIT $params[limit]";
 
         return $this->getRows($sql);
     }

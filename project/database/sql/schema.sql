@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS pizzaria.usuario (
 );
 
 CREATE TABLE IF NOT EXISTS pizzaria.cartao_credito (
+    "id"                SERIAL,
     "nome"              VARCHAR(255)            NOT NULL,
     "numero"            VARCHAR(16)             NOT NULL,
     "expiracao"         pizzaria.data_expiracao NOT NULL,
@@ -25,11 +26,13 @@ CREATE TABLE IF NOT EXISTS pizzaria.pedido (
 );
 
 CREATE TABLE IF NOT EXISTS pizzaria.pedido_tem_bebidas (
+    "id"                SERIAL,
     "pedido_id"         INTEGER                 NOT NULL,
     "bebida_id"         INTEGER                 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS pizzaria.pedido_tem_pizzas (
+    "id"                SERIAL,
     "pedido_id"         INTEGER                 NOT NULL,
     "pizza_id"          INTEGER                 NOT NULL
 );
@@ -59,6 +62,7 @@ CREATE TABLE IF NOT EXISTS pizzaria.coberturas (
 );
 
 CREATE TABLE IF NOT EXISTS pizzaria.coberturas_pizza (
+    "id"                SERIAL,
     "pizza_id"          INTEGER                 NOT NULL,
     "cobertura_id"      INTEGER                 NOT NULL
 );

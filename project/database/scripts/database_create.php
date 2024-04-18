@@ -1,6 +1,6 @@
 <?php
 
-include_once "bootstrap.php";
+include_once "src/bootstrap.php";
 
 $sql_domains = file_get_contents("database/sql/domains.sql");
 $sql_schema = file_get_contents("database/sql/schema.sql");
