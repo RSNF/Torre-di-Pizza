@@ -1,6 +1,6 @@
-FROM postgres:bullseye
+FROM postgres:17-alpine
 
-RUN cp /usr/share/zoneinfo/America/Bahia /etc/localtime && echo "America/Bahia" > /etc/timezone
-RUN apt-get update && apt-get upgrade -y && apt-get install vim -y
+RUN apk add --no-cache tzdata
+ENV TZ=Etc/UTC
 
 EXPOSE 5432
