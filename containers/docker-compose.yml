@@ -37,4 +37,5 @@ services:
       - 8080:80
     volumes:
       - ./../project:/var/www/html/
+    command: php -S 0.0.0.0:80 src/index.php
     working_dir: "/var/www/html"
