@@ -17,5 +17,3 @@ if (pg_query($dbconn, $sql_functions) === FALSE) {
 if (pg_query($dbconn, $sql_schema) === FALSE) {
     echo "\nERROR\nError: Create Schema failed :(\n\n";
 }
-
-?>
