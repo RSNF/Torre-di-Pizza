@@ -1,10 +1,10 @@
 {
     "scripts": {
-        "dbcreate": "php database/scripts/database_create.php",
-        "dbseeder": "php database/seeders/database_seeder.php",
+        "dbcreate": "php scripts/database/database_create.php",
+        "dbseeder": "php scripts/seeders/database_seeder.php",
         "dbmake": {
-            "dbcreate": "php database/scripts/database_create.php",
-            "dbseeder": "php database/seeders/database_seeder.php"
+            "dbcreate": "php scripts/database/database_create.php",
+            "dbseeder": "php scripts/seeders/database_seeder.php"
         },
         "server": "php -S 0.0.0.0:80 -t src/",
         "tests": "./tools/phpunit.phar tests"

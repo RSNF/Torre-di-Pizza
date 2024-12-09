@@ -2,9 +2,9 @@
 
 include_once "src/bootstrap.php";
 
-$sql_domains = file_get_contents("database/sql/domains.sql");
-$sql_schema = file_get_contents("database/sql/schema.sql");
-$sql_functions = file_get_contents("database/sql/functions.sql");
+$sql_domains = file_get_contents("./domains.sql");
+$sql_schema = file_get_contents("./schema.sql");
+$sql_functions = file_get_contents("./functions.sql");
 
 if (pg_query($dbconn, $sql_domains) === FALSE) {
     echo "\nERROR\nError: Create Domains failed :(\n\n";

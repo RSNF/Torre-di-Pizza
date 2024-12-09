@@ -13,7 +13,8 @@ $usuarios = array(
     array("Juliana", password_hash("senhaxyz", PASSWORD_BCRYPT), "(91) 99876-5432", "Rua J, 890")
 );
 
-function usuario_seeder() {
+function usuario_seeder()
+{
 
     global $usuarios, $dbconn;
 
@@ -28,3 +29,4 @@ function usuario_seeder() {
 }
 
 ?>
+
